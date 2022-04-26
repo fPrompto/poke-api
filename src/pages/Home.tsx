@@ -1,5 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+
+import { fetch } from '../utils/fetch';
+
 import PokeCard from '../components/PokeCard';
 
 const Home: React.FC = () => {
@@ -15,15 +17,6 @@ const Home: React.FC = () => {
       }
     ]
   });
-
-  const fetch = async (url: string) => {
-    const response = await axios({
-      method: 'GET',
-      url,
-    });
-
-    return response.data;
-  };
 
   const loadPokemons = async () => {
     const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');

@@ -1,3 +1,4 @@
 import Home from "./Home";
+import PokeDetails from "./PokeDetails";
 
-export default Home;
+export { Home, PokeDetails };

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes as Switch } from 'react-router-dom';
 
 import PokeProvider from './context/PokeProvider';
+
 import routes from './routes';
 
 const App: React.FC = () => {

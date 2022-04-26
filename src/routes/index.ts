@@ -1,8 +1,6 @@
-import React from "react";
-import { Route } from 'react-router-dom';
 import { RouteI } from "../interfaces/RouteI";
 
-import Home from '../pages';
+import { Home, PokeDetails } from '../pages';
 
 const routes: RouteI[] = [
   {
@@ -11,6 +9,12 @@ const routes: RouteI[] = [
     element: Home,
     exact: true,
   },
+  {
+    path: '/details/:id',
+    name: 'Pokemon Details',
+    element: PokeDetails,
+    exact: true,
+  }
 ];
 
 export default routes;
