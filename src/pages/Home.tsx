@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import PokeCard from '../components/PokeCard';
 
 const Home: React.FC = () => {
   const [data, setData] = useState<any>({
@@ -33,18 +34,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {data.results.map((poke: any, i: number) => {
-        const pokedex = poke.url.slice(34, -1);
-        return (
-          <div>
-            <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex}.png`}
-              alt={poke.name}
-            />
-            <span key={i}>{poke.name}</span>
-          </div>
-        );
-      })}
+      {data.results.map((poke: any, i: number) => (
+        <PokeCard
+        name={ poke.name }
+        url={ poke.url }
+        index={ i }
+        />
+      ))}
     </>
   );
 };
