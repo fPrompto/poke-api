@@ -2,6 +2,8 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 
+import { Heading } from '@chakra-ui/react'
+
 import { fetch } from '../utils/fetch';
 import { firstCharUpperCase } from '../utils/firstCharUpperCase';
 
@@ -23,7 +25,8 @@ const PokeDetails: React.FC = () => {
 
   return isLoading ? <Loading /> : (
     <>
-      <h1>{firstCharUpperCase(data.name)}</h1>
+      <Heading as='h1' size='4xl'>{firstCharUpperCase(data.name)}</Heading>
+
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="" />
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`} alt="" />
 
@@ -34,7 +37,7 @@ const PokeDetails: React.FC = () => {
       <br />
 
       <div className='status'>
-        <h2>Status</h2>
+        <Heading as='h2' size='3xl'>Status</Heading>
         <br />
         {data.stats.map((stat: any, i: number) => {
           const newName = firstCharUpperCase(stat.stat.name);
@@ -54,7 +57,7 @@ const PokeDetails: React.FC = () => {
       </div>
 
       <div className='abilities'>
-        <h2>Abilities</h2>
+        <Heading as='h2' size='3xl'>Abilities</Heading>
         <br />
         {data.abilities.map((abilit: any, i: number) => {
           const newAbility = abilit.ability.is_hidden ? 'Yes' : 'No';
@@ -72,7 +75,7 @@ const PokeDetails: React.FC = () => {
       </div>
 
       <div className='moves'>
-        <h2>Moves</h2>
+        <Heading as='h2' size='3xl'>Moves</Heading>
         <br />
         {data.moves.map((mov: any, i: number) => {
           const newName = firstCharUpperCase(mov.move.name);
@@ -81,26 +84,27 @@ const PokeDetails: React.FC = () => {
               const newM = firstCharUpperCase(method.move_learn_method.name);
               const newV = firstCharUpperCase(method.version_group.name);
               return (
-                <>
+                <div className='move-name'>
                   <span>{`Move learn method: ${newM}`}</span>
                   <br />
                   <span>{`Version group: ${newV}`}</span>
                   <br />
                   <span>{`Level learned at: ${method.level_learned_at}`}</span>
                   <br />
-                </>
+                  <br />
+                </div>
 
               );
             });
           return (
-            <>
-              <h3>{`${newName}`}</h3>
+            <div className='move-version-group'>
+              <Heading as='h3' size='lg'>{`${newName}`}</Heading>
               <br />
-              <h4>Version group Details</h4>
+              <Heading as='h4' size='md'>Version group Details</Heading>
               <br />
               {mapVersionGroup}
               <br />
-            </>
+            </div>
           );
         })}
       </div>
