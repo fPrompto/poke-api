@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { fetch } from '../utils/fetch';
 
 import PokeCard from '../components/PokeCard';
+import Loading from '../components/Loading';
 
 const Home: React.FC = () => {
   const [data, setData] = useState<any>({
@@ -17,21 +18,25 @@ const Home: React.FC = () => {
       }
     ]
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const loadPokemons = async () => {
-    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');
+    setIsLoading(true);
+    // const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');
+    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/');
     await setData(pokeData);
+    setIsLoading(false);
   };
 
   useEffect(() => { loadPokemons() }, []);
 
-  return (
+  return isLoading ? <Loading /> : (
     <>
       {data.results.map((poke: any, i: number) => (
         <PokeCard
-        name={ poke.name }
-        url={ poke.url }
-        index={ i }
+          name={poke.name}
+          url={poke.url}
+          index={i}
         />
       ))}
     </>
