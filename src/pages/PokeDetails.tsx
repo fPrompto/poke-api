@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 
-import { Heading } from '@chakra-ui/react'
+import { Heading, Image } from '@chakra-ui/react'
 
 import { fetch } from '../utils/fetch';
 import { firstCharUpperCase } from '../utils/firstCharUpperCase';
@@ -27,12 +27,26 @@ const PokeDetails: React.FC = () => {
     <>
       <Heading as='h1' size='4xl'>{firstCharUpperCase(data.name)}</Heading>
 
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="" />
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`} alt="" />
+      <Image
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        alt=""
+        boxSize='400px'
+        objectFit='cover'
+      />
+      <Image
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`}
+        alt=""
+      />
 
       {/* sprites - back */}
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`} alt="" />
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`} alt="" />
+      <Image
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`}
+        alt=""
+      />
+      <Image
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`}
+        alt=""
+      />
 
       <br />
 

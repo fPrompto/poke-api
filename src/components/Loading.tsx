@@ -7,6 +7,7 @@ const Loading: React.FC = () => (
     color='green.300'
     size='150px'
     className='loading'
+    margin='auto'
   />
 );
 

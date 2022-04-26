@@ -22,8 +22,8 @@ const Home: React.FC = () => {
 
   const loadPokemons = async () => {
     setIsLoading(true);
-    // const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');
-    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');
+    // const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/');
     await setData(pokeData);
     setIsLoading(false);
   };
