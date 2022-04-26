@@ -23,7 +23,7 @@ const PokeDetails: React.FC = () => {
 
   return isLoading ? <Loading /> : (
     <>
-    <h1>{firstCharUpperCase(data.name)}</h1>
+      <h1>{firstCharUpperCase(data.name)}</h1>
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="" />
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`} alt="" />
 
@@ -33,81 +33,77 @@ const PokeDetails: React.FC = () => {
 
       <br />
 
-      <h2>Status</h2>
-      <br />
-      {data.stats.map((stat: any, i: number) => {
-        const newName = firstCharUpperCase(stat.stat.name);
-        return (
-          <>
-            <span key={i}>{`${newName}: `}</span>
-            <span key={i}>{`${stat.base_stat} + Effort: ${stat.effort}`}</span>
-            <br />
-          </>
-        );
-      })}
-      <span>{`Height: ${data.height}`}</span>
-      <br />
-      <span>{`Weight: ${data.weight}`}</span>
-      <br />
-      <span>{`Base experience: ${data.base_experience}`}</span>
-      <br />
+      <div className='status'>
+        <h2>Status</h2>
+        <br />
+        {data.stats.map((stat: any, i: number) => {
+          const newName = firstCharUpperCase(stat.stat.name);
+          return (
+            <>
+              <span key={i}>{`${newName}: `}</span>
+              <span key={i}>{`${stat.base_stat} + Effort: ${stat.effort}`}</span>
+              <br />
+            </>
+          );
+        })}
+        <span>{`Height: ${data.height}`}</span>
+        <br />
+        <span>{`Weight: ${data.weight}`}</span>
+        <br />
+        <span>{`Base experience: ${data.base_experience}`}</span>
+      </div>
 
-      <br />
+      <div className='abilities'>
+        <h2>Abilities</h2>
+        <br />
+        {data.abilities.map((abilit: any, i: number) => {
+          const newAbility = abilit.ability.is_hidden ? 'Yes' : 'No';
+          return (
+            <>
+              <span>{`Name: ${firstCharUpperCase(abilit.ability.name)}`}</span>
+              <br />
+              <span>{`Hidden: ${newAbility}`}</span>
+              <br />
+              <span>{`Slot: ${abilit.slot}`}</span>
+              <br />
+            </>
+          );
+        })}
+      </div>
 
-      <h2>Abilities</h2>
-      <br />
-      {data.abilities.map((abilit: any, i: number) => {
-        const newAbility = abilit.ability.is_hidden ? 'Yes' : 'No';
-        return (
-          <>
-            <span>{`Name: ${firstCharUpperCase(abilit.ability.name)}`}</span>
-            <br />
-            <span>{`Hidden: ${newAbility}`}</span>
-            <br />
-            <span>{`Slot: ${abilit.slot}`}</span>
-            <br />
+      <div className='moves'>
+        <h2>Moves</h2>
+        <br />
+        {data.moves.map((mov: any, i: number) => {
+          const newName = firstCharUpperCase(mov.move.name);
+          const mapVersionGroup = mov.version_group_details
+            .map((method: any, i: number) => {
+              const newM = firstCharUpperCase(method.move_learn_method.name);
+              const newV = firstCharUpperCase(method.version_group.name);
+              return (
+                <>
+                  <span>{`Move learn method: ${newM}`}</span>
+                  <br />
+                  <span>{`Version group: ${newV}`}</span>
+                  <br />
+                  <span>{`Level learned at: ${method.level_learned_at}`}</span>
+                  <br />
+                </>
 
-            <br />
-          </>
-        );
-      })}
-
-      <br />
-      <br />
-
-      <h2>Moves</h2>
-      <br />
-      <br />
-      {data.moves.map((mov: any, i: number) => {
-        const newName = firstCharUpperCase(mov.move.name);
-        const mapVersionGroup = mov.version_group_details
-          .map((method: any, i: number) => {
-            const newM = firstCharUpperCase(method.move_learn_method.name);
-            const newV = firstCharUpperCase(method.version_group.name);
-            return (
-              <>
-                <span>{`Move learn method: ${newM}`}</span>
-                <br />
-                <span>{`Version group: ${newV}`}</span>
-                <br />
-                <span>{`Level learned at: ${method.level_learned_at}`}</span>
-                <br />
-                <br />
-              </>
-
-            );
-          });
-        return (
-          <>
-            <h3>{`${newName}`}</h3>
-            <br />
-            <h4>Version group Details</h4>
-            <br />
-            {mapVersionGroup}
-            <br />
-          </>
-        );
-      })}
+              );
+            });
+          return (
+            <>
+              <h3>{`${newName}`}</h3>
+              <br />
+              <h4>Version group Details</h4>
+              <br />
+              {mapVersionGroup}
+              <br />
+            </>
+          );
+        })}
+      </div>
     </>
   );
 };
