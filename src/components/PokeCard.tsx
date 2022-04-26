@@ -8,7 +8,7 @@ const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
   const newName = firstCharUpperCase(name);
 
   return (
-    <div key={index}>
+    <div className='pokemon-card' key={index}>
       <Link to={`/details/${pokedex}`}>
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex}.png`}
