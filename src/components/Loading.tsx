@@ -1,14 +1,16 @@
 import React from 'react';
-import { CircularProgress } from '@chakra-ui/react'
+import { CircularProgress } from '@chakra-ui/react';
+
+import '../css/Loading.css';
 
 const Loading: React.FC = () => (
-  <CircularProgress
-    isIndeterminate
-    color='green.300'
-    size='150px'
-    className='loading'
-    margin='auto'
-  />
+  <div className='loading'>
+    <CircularProgress
+      isIndeterminate
+      color='green.300'
+      size='150px'
+    />
+  </div>
 );
 
 export default Loading;

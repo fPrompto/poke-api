@@ -1,30 +1,20 @@
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Image, Badge } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 
 import { firstCharUpperCase } from '../utils/firstCharUpperCase';
 
 const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
   const pokedex = url.slice(34, -1);
-  const newName = firstCharUpperCase(name);
 
   const property = {
     imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex}.png`,
-    imageAlt: 'Rear view of modern home with pool',
+    imageAlt: `Pokemon ${firstCharUpperCase(name)}`,
     title: firstCharUpperCase(name),
   };
 
   return (
-    // <Box className='pokemon-card' key={index}>
-    //   <Link to={`/details/${pokedex}`}>
-    //     <img
-    //       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex}.png`}
-    //       alt={name}
-    //     />
-    //     <span>{newName}</span>
-    //   </Link>
-    // </Box>
-    <Link to={`/details/${pokedex}`}>
+    <Link key={ index } to={`/details/${pokedex}`}>
       <Box
         minH='200px'
         minW='200px'
