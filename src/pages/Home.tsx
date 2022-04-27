@@ -5,6 +5,8 @@ import { fetch } from '../utils/fetch';
 import PokeCard from '../components/PokeCard';
 import Loading from '../components/Loading';
 
+import '../css/Home.css';
+
 const Home: React.FC = () => {
   const [data, setData] = useState<any>({
     results: [
@@ -31,7 +33,7 @@ const Home: React.FC = () => {
   useEffect(() => { loadPokemons() }, []);
 
   return isLoading ? <Loading /> : (
-    <>
+    <div className='pokemon-list'>
       {data.results.map((poke: any, i: number) => (
         <PokeCard
           name={poke.name}
@@ -39,7 +41,7 @@ const Home: React.FC = () => {
           index={i}
         />
       ))}
-    </>
+    </div>
   );
 };
 

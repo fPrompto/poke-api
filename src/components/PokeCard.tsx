@@ -28,8 +28,8 @@ const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
       <Box
         minH='200px'
         minW='200px'
-        maxW='300px'
-        maxH='300px'
+        maxW='200px'
+        maxH='200px'
         borderWidth='1px'
         borderRadius='200px'
         overflow='hidden'
@@ -38,12 +38,12 @@ const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
         margin='10px'
       >
         <Image
-          boxSize='150px'
+          boxSize='120px'
           objectFit='fill'
           src={property.imageUrl}
           alt={property.imageAlt}
           margin='auto'
-          marginTop='-4px'
+          marginTop='4px'
         />
 
         <Box p='6'>
@@ -54,7 +54,7 @@ const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
             fontSize='20px'
             lineHeight='tight'
             textAlign='center'
-            marginTop='-32px'
+            marginTop='-28px'
           >
             {property.title}
           </Box>
