@@ -1,0 +1,28 @@
+.images {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.status-abilities-group {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.status, .abilities {
+  width: 260px;
+  margin-bottom: 30px;
+}
+
+.version-group {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.version-name {
+  margin: 10px;
+  width: 250px;
+}
