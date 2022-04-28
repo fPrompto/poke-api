@@ -5,12 +5,8 @@ import Loading from '../components/Loading';
 import {
   Heading,
   Image,
-  List,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
-  Badge,
 } from '@chakra-ui/react';
 
 import { fetch } from '../utils/fetch';
