@@ -11,12 +11,16 @@ import '../css/Home.css';
 const Home: React.FC = () => {
   const [data, setData] = useState<Array<object>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [dataLength, setDataLength] = useState<number>(1);
 
   const loadPokemons = async () => {
     setIsLoading(true);
     const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10');
+    const getDataLength = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100000000');
     await setData(pokeData.results);
     setIsLoading(false);
+    setDataLength(getDataLength.results.length);
   };
 
   const loadMorePokemons = async () => {
@@ -24,26 +28,29 @@ const Home: React.FC = () => {
 
     const newData = data.concat(pokeData.results);
 
-    console.log(data);
-    console.log('new data ===>', newData);
-
     await setData(newData);
   };
 
   useEffect(() => {
-    loadPokemons();
-  }, []);
+    if (dataLength === data.length) {
+      setHasMore(false);
+    }
+  }, [data]);
+
+  useEffect(() => { loadPokemons() }, []);
 
   return isLoading ? <Loading size='150px' /> : (
     <InfiniteScroll
       dataLength={data.length} //This is important field to render the next data
       next={loadMorePokemons}
-      hasMore={true}
+      hasMore={hasMore}
       loader={<h4>Carregando...</h4>}
       endMessage={
-        <p style={{ textAlign: 'center' }}>
-          <b>Você chegou ao fim 😄😄😄</b>
-        </p>
+        <div>
+          <p style={{ textAlign: 'center' }}>
+            <b>Você chegou ao fim 😄😄😄</b>
+          </p>
+        </div>
       }
       // below props only if you need pull down functionality
       // refreshFunction={this.refresh}
