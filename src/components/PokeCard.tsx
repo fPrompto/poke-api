@@ -14,7 +14,7 @@ const PokeCard: React.FC<PropsWithChildren<any>> = ({ name, url, index }) => {
   };
 
   return (
-    <Link key={ index } to={`/details/${pokedex}`}>
+    <Link key={index} to={`/details/${pokedex}`}>
       <Box
         minH='200px'
         minW='200px'
