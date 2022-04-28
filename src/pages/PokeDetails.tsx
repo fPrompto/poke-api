@@ -33,7 +33,7 @@ const PokeDetails: React.FC = () => {
 
   useEffect(() => { loadDetails() }, []);
 
-  return isLoading ? <Loading /> : (
+  return isLoading ? <Loading size='150px' /> : (
     <>
       {/* <Heading
         as='h1'

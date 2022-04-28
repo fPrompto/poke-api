@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { fetch } from '../utils/fetch';
 
@@ -8,40 +9,62 @@ import Loading from '../components/Loading';
 import '../css/Home.css';
 
 const Home: React.FC = () => {
-  const [data, setData] = useState<any>({
-    results: [
-      {
-        name: 'bulbasaur',
-        url: 'https://pokeapi.co/api/v2/pokemon/1/',
-      },
-      {
-        name: 'ivysaur',
-        url: 'https://pokeapi.co/api/v2/pokemon/2/',
-      }
-    ]
-  });
+  const [data, setData] = useState<Array<object>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const loadPokemons = async () => {
     setIsLoading(true);
-    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9999');
-    // const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/');
-    await setData(pokeData);
+    const pokeData = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10');
+    await setData(pokeData.results);
     setIsLoading(false);
   };
 
-  useEffect(() => { loadPokemons() }, []);
+  const loadMorePokemons = async () => {
+    const pokeData = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${data.length}&limit=10`);
 
-  return isLoading ? <Loading /> : (
-    <div className='pokemon-list'>
-      {data.results.map((poke: any, i: number) => (
+    const newData = data.concat(pokeData.results);
+
+    console.log(data);
+    console.log('new data ===>', newData);
+
+    await setData(newData);
+  };
+
+  useEffect(() => {
+    loadPokemons();
+  }, []);
+
+  return isLoading ? <Loading size='150px' /> : (
+    <InfiniteScroll
+      dataLength={data.length} //This is important field to render the next data
+      next={loadMorePokemons}
+      hasMore={true}
+      loader={<h4>Carregando...</h4>}
+      endMessage={
+        <p style={{ textAlign: 'center' }}>
+          <b>Você chegou ao fim 😄😄😄</b>
+        </p>
+      }
+      // below props only if you need pull down functionality
+      // refreshFunction={this.refresh}
+      // pullDownToRefresh
+      // pullDownToRefreshThreshold={50}
+      // pullDownToRefreshContent={
+      //   <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+      // }
+      // releaseToRefreshContent={
+      //   <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+      // }
+      className='pokemon-list'
+    >
+      {data.map((poke: any, i: number) => (
         <PokeCard
           name={poke.name}
           url={poke.url}
           index={i}
         />
       ))}
-    </div>
+    </InfiniteScroll>
   );
 };
 
